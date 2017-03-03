@@ -1,5 +1,5 @@
 const request = require('request');
-const apiUrl = 'http://artifactory.softhouse.se/artifactory/api/storageinfo';
+const apiUrl = 'http://artifactory.softhouse.se/artifactory/api/';
 
 module.exports = {
 
@@ -12,7 +12,7 @@ module.exports = {
 
             // Configure the request
             const options = {
-                url: apiUrl,
+                url: apiUrl + 'storageinfo',
                 method: 'GET',
                 headers: headers,
             }
@@ -21,7 +21,30 @@ module.exports = {
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
                     var str = JSON.parse(data); 
-                    console.log(str);
+                    resolve(str);
+                }
+            })
+        })
+    },
+
+    storage: function(repo, token) {
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token
+            }
+
+            // Configure the request
+            const options = {
+                url: apiUrl + 'storage/' + repo,
+                method: 'GET',
+                headers: headers,
+            }
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    var str = JSON.parse(data); 
                     resolve(str);
                 }
             })

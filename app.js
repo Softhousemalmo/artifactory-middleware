@@ -22,6 +22,11 @@ app.get('/api/storageinfo', (req, res) => {
   artifact.then(val => res.json(val));
 })
 
+app.get('/api/storage/:repo', (req, res) => {
+  var artifact = artifactory.storage(req.params.repo, ACCESS_TOKEN);
+  artifact.then(val => res.json(val));
+})
+
 var httpServer = http.createServer(app);
 httpServer.listen(app.get('port'), () => {
     console.log("Artifactory UI Middleware:\n  => http://localhost:" + app.get('port'));
