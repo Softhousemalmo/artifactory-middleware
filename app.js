@@ -1,10 +1,12 @@
-var artifactory = require('./artifactory.js')
+var storage = require('./storage')
+var repositories = require('./repositories')
+
 var http = require('http')
 var express = require('express')
 var app = express()
 
 
-const ACCESS_TOKEN = "AKCp2VokTFqQfV5UUja36PfcCref4qFeNPf8Xtu2JUAorcz9q9MESZABck1uwLCUHZe4TPgsG";
+const ACCESS_TOKEN = "AKCp2VokTFqBvRHyeQmrvQpyn52xrb3rsD2kpWFf3b5Qc8HLQMe4WeS7w41fAViFWvbUUN5vV";
 
 
 app.set('port', 3000);
@@ -17,14 +19,29 @@ app.use((req, res, next) => {
 });
 
 
-app.get('/api/storageinfo', (req, res) => {
-  var artifact = artifactory.storageinfo(ACCESS_TOKEN);
-  artifact.then(val => res.json(val));
+app.get('/api/repositories', (req, res) => {
+  var repo = repositories.repositories(ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
+app.get('/api/repositoriesProperties/:repo/', (req, res) => {
+  var repo = repositories.repositoriesProperties(req.params.repo, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
 })
 
 app.get('/api/storage/:repo', (req, res) => {
-  var artifact = artifactory.storage(req.params.repo, ACCESS_TOKEN);
+  var artifact = storage.storage(req.params.repo, ACCESS_TOKEN);
   artifact.then(val => res.json(val));
+})
+
+app.get('/api/storageSecondLevel/:repo1/:repo2', (req, res) => {
+  var repo = storage.storageSecondLevel(req.params.repo1, req.params.repo2, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
+app.get('/api/storageTheirdLevel/:repo1/:repo2/:repo3', (req, res) => {
+  var repo = storage.storageTheirdLevel(req.params.repo1, req.params.repo2, req.params.repo3, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
 })
 
 var httpServer = http.createServer(app);

@@ -1,9 +1,9 @@
 const request = require('request');
-const apiUrl = 'http://artifactory.softhouse.se/artifactory/api/';
+const apiUrl = 'http://artifactory.tetrapak.com/api/';
 
 module.exports = {
 
-    storageinfo: function(token) {
+    storage: function(repo, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -12,7 +12,31 @@ module.exports = {
 
             // Configure the request
             const options = {
-                url: apiUrl + 'storageinfo',
+                url: apiUrl + 'storage/' + repo,
+                method: 'GET',
+                headers: headers,
+            }
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    var str = JSON.parse(data); 
+                    resolve(str);
+                }
+            })
+        })
+    },
+    
+    storageSecondLevel: function(repo1, repo2, token) {
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token
+            }
+
+            // Configure the request
+            const options = {
+                url: apiUrl + 'storage/' + repo1 + '/' + repo2 + '/',
                 method: 'GET',
                 headers: headers,
             }
@@ -27,7 +51,7 @@ module.exports = {
         })
     },
 
-    storage: function(repo, token) {
+    storageTheirdLevel: function(repo1, repo2, repo3, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -36,7 +60,7 @@ module.exports = {
 
             // Configure the request
             const options = {
-                url: apiUrl + 'storage/' + repo,
+                url: apiUrl + 'storage/' + repo1 + '/' + repo2 + '/' + repo3 + '/',
                 method: 'GET',
                 headers: headers,
             }
