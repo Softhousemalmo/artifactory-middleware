@@ -1,15 +1,16 @@
 var storage = require('./storage')
 var repositories = require('./repositories')
+var config = require('./config')
 
 var http = require('http')
 var express = require('express')
 var app = express()
 
 
-const ACCESS_TOKEN = "AKCp2VokTFqBvRHyeQmrvQpyn52xrb3rsD2kpWFf3b5Qc8HLQMe4WeS7w41fAViFWvbUUN5vV";
+var ACCESS_TOKEN = config.apiToken();
 
 
-app.set('port', 3000);
+app.set('port', config.serverPort());
 app.use((req, res, next) => {
   res.setHeader('content-type', 'application/json');
   res.setHeader("Access-Control-Allow-Origin", "*");

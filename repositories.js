@@ -1,5 +1,7 @@
-const request = require('request');
-const apiUrl = 'http://artifactory.tetrapak.com/api/';
+var request = require('request');
+var config = require('./config')
+
+var apiUrl = config.apiUrl();
 
 module.exports = {
 
