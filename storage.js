@@ -75,5 +75,53 @@ module.exports = {
                 }
             })
         })
+    },
+
+    storageFourthLevel: function(repo1, repo2, repo3, repo4, token) {
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token
+            }
+
+            // Configure the request
+            const options = {
+                url: apiUrl + 'storage/' + repo1 + '/' + repo2 + '/' + repo3 + '/' + repo4 + '/',
+                method: 'GET',
+                headers: headers,
+            }
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    var str = JSON.parse(data); 
+                    resolve(str);
+                }
+            })
+        })
+    },
+
+    storageArtifactLevel: function(repo1, repo2, repo3, repo4, repo5, token) {
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token
+            }
+
+            // Configure the request
+            const options = {
+                url: apiUrl + 'storage/' + repo1 + '/' + repo2 + '/' + repo3 + '/' + repo4 + '/' + repo5 + '/',
+                method: 'GET',
+                headers: headers,
+            }
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    var str = JSON.parse(data); 
+                    resolve(str);
+                }
+            })
+        })
     }
 }

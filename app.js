@@ -45,6 +45,16 @@ app.get('/api/storageTheirdLevel/:repo1/:repo2/:repo3', (req, res) => {
   repo.then(val => res.json(val));
 })
 
+app.get('/api/storageFourthLevel/:repo1/:repo2/:repo3/:repo4', (req, res) => {
+  var repo = storage.storageFourthLevel(req.params.repo1, req.params.repo2, req.params.repo3, req.params.repo4, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
+app.get('/api/storageArtifactLevel/:repo1/:repo2/:repo3/:repo4/:repo5', (req, res) => {
+  var repo = storage.storageArtifactLevel(req.params.repo1, req.params.repo2, req.params.repo3, req.params.repo4, req.params.repo5, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
 var httpServer = http.createServer(app);
 httpServer.listen(app.get('port'), () => {
     console.log("Artifactory UI Middleware:\n  => http://localhost:" + app.get('port'));
