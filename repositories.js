@@ -5,6 +5,95 @@ var apiUrl = config.apiUrl();
 
 module.exports = {
 
+    latestBuild: function(query, token) {
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token,
+                'Content-Type' : 'application/json; charset=UTF-8'
+            }
+
+
+            // Configure the request
+            const options = {
+                headers: headers,
+                url: apiUrl + 'build',
+                method: 'GET',
+                
+            }
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    var str = JSON.parse(data); 
+                    resolve(str);
+                }
+            })
+        })
+    },
+
+    dependency: function(sha, token) {
+        console.log(sha);
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token,
+            }
+
+
+            // Configure the request
+            const options = {
+                headers: headers,
+                url: apiUrl + 'search/dependency?sha1=' + sha,
+                method: 'GET',
+            }
+
+            console.log(options);
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    console.log(response);
+                    var str = JSON.parse(data); 
+                    resolve(str);
+                }
+            })
+        })
+    },
+
+
+    search: function(query, token) {
+        return new Promise((resolve, reject) => {
+            // Set the headers
+            const headers = {
+                'X-JFrog-Art-Api': token,
+                'Content-Type': 'text/plain'
+            }
+
+            const search = "items.find({'repo':{'$eq':'"+ query +"'});";
+
+            console.log(search);
+
+
+            // Configure the request
+            const options = {
+                headers: headers,
+                url: apiUrl + 'search/aql',
+                body: search,
+                method: 'POST',
+                
+            }
+
+            // Start the request
+            request(options, function (error, response, data) {
+                if (!error && response.statusCode == 200) {
+                    var str = JSON.parse(data); 
+                    resolve(str);
+                }
+            })
+        })
+    },
+
     repositories: function(token) {
         return new Promise((resolve, reject) => {
             // Set the headers

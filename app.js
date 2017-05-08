@@ -20,6 +20,21 @@ app.use((req, res, next) => {
 });
 
 
+app.post('/api/search/:query', (req, res) => {
+  var repo = repositories.search(req.params.query, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
+app.get('/api/latest/build', (req, res) => {
+  var repo = repositories.latestBuild(ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
+app.get('/api/dependencys/:sha', (req, res) => {
+  var repo = repositories.dependency(req.params.sha, ACCESS_TOKEN);
+  repo.then(val => res.json(val));
+})
+
 app.get('/api/repositories', (req, res) => {
   var repo = repositories.repositories(ACCESS_TOKEN);
   repo.then(val => res.json(val));
