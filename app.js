@@ -40,7 +40,7 @@ app.get('/api/repositories', (req, res) => {
   repo.then(val => res.json(val));
 })
 
-app.get('/api/repositoriesProperties/:repo*?properties', (req, res) => {
+app.get('/api/repositoriesProperties/:repo?properties', (req, res) => {
   var repo = repositories.repositoriesProperties(req.params , ACCESS_TOKEN);
   repo.then(val => res.json(val));
 })
