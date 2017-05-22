@@ -5,12 +5,12 @@ var apiUrl = config.apiUrl();
 
 module.exports = {
 
-    latestBuild: function(query, token) {
+    latestBuild: function (query, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
                 'X-JFrog-Art-Api': token,
-                'Content-Type' : 'application/json; charset=UTF-8'
+                'Content-Type': 'application/json; charset=UTF-8'
             }
 
 
@@ -19,21 +19,20 @@ module.exports = {
                 headers: headers,
                 url: apiUrl + 'build',
                 method: 'GET',
-                
+
             }
 
             // Start the request
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
-                    var str = JSON.parse(data); 
+                    var str = JSON.parse(data);
                     resolve(str);
                 }
             })
         })
     },
 
-    dependency: function(sha, token) {
-       // console.log(sha);
+    dependency: function (sha, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -48,14 +47,14 @@ module.exports = {
                 method: 'GET',
             }
 
-          //  console.log('options : ' + options);
-           // console.log("this is the url "+ url);
+            console.log('options : ' + options);
+            console.log("this is the url " + url);
 
             // Start the request
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
-                 //   console.log(response);
-                    var str = JSON.parse(data); 
+                    console.log("response for option request :  ", response);
+                    var str = JSON.parse(data);
                     resolve(str);
                 }
             })
@@ -63,7 +62,7 @@ module.exports = {
     },
 
 
-    search: function(query, token) {
+    search: function (query, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -71,10 +70,7 @@ module.exports = {
                 'Content-Type': 'text/plain'
             }
 
-            const search = "items.find({'repo':{'$eq':'"+ query +"'});";
-
-           // console.log(search);
-
+            const search = "items.find({'repo':{'$eq':'" + query + "'});";
 
             // Configure the request
             const options = {
@@ -82,20 +78,20 @@ module.exports = {
                 url: apiUrl + 'search/aql',
                 body: search,
                 method: 'POST',
-                
+
             }
 
             // Start the request
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
-                    var str = JSON.parse(data); 
+                    var str = JSON.parse(data);
                     resolve(str);
                 }
             })
         })
     },
 
-    repositories: function(token) {
+    repositories: function (token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -112,7 +108,7 @@ module.exports = {
             // Start the request
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
-                    var str = JSON.parse(data); 
+                    var str = JSON.parse(data);
                     resolve(str);
                 }
             })
@@ -125,7 +121,7 @@ module.exports = {
     //         const headers = {
     //             'X-JFrog-Art-Api': token
     //         }
-        properties: function(repo, token) {
+    properties: function (repo, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -139,11 +135,11 @@ module.exports = {
                 headers: headers,
             }
 
-          //  console.log(options);
+            console.log("option for properities:   ", options);
 
             // Start the request
             request(options, function (error, response, data) {
-                var str = JSON.parse(data); 
+                var str = JSON.parse(data);
                 resolve(str);
             })
         })
