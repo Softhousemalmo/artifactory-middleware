@@ -23,7 +23,11 @@ module.exports = {
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
                     var str = JSON.parse(data); 
+                    console.log('the storage name is =' + str);
                     resolve(str);
+                } else {
+                     console.log('ellol storage name is =' + error);
+                    reject(error);
                 }
             })
         })

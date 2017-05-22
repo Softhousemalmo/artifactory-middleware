@@ -33,7 +33,7 @@ module.exports = {
     },
 
     dependency: function(sha, token) {
-        console.log(sha);
+       // console.log(sha);
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -48,12 +48,13 @@ module.exports = {
                 method: 'GET',
             }
 
-            console.log(options);
+          //  console.log('options : ' + options);
+           // console.log("this is the url "+ url);
 
             // Start the request
             request(options, function (error, response, data) {
                 if (!error && response.statusCode == 200) {
-                    console.log(response);
+                 //   console.log(response);
                     var str = JSON.parse(data); 
                     resolve(str);
                 }
@@ -72,7 +73,7 @@ module.exports = {
 
             const search = "items.find({'repo':{'$eq':'"+ query +"'});";
 
-            console.log(search);
+           // console.log(search);
 
 
             // Configure the request
@@ -118,7 +119,13 @@ module.exports = {
         })
     },
 
-    repositoriesProperties: function(repo, token) {
+    // repositoriesProperties: function(repo, token) {
+    //     return new Promise((resolve, reject) => {
+    //         // Set the headers
+    //         const headers = {
+    //             'X-JFrog-Art-Api': token
+    //         }
+        properties: function(repo, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {
@@ -132,7 +139,7 @@ module.exports = {
                 headers: headers,
             }
 
-            console.log(options);
+          //  console.log(options);
 
             // Start the request
             request(options, function (error, response, data) {
