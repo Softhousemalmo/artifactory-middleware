@@ -115,13 +115,7 @@ module.exports = {
         })
     },
 
-    // repositoriesProperties: function(repo, token) {
-    //     return new Promise((resolve, reject) => {
-    //         // Set the headers
-    //         const headers = {
-    //             'X-JFrog-Art-Api': token
-    //         }
-    properties: function (repo, token) {
+    repositoriesProperties: function (repo, token) {
         return new Promise((resolve, reject) => {
             // Set the headers
             const headers = {

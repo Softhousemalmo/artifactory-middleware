@@ -41,7 +41,7 @@ app.get('/api/repositories', (req, res) => {
 })
 
 app.get('/api/repositoriesProperties/:repo*?properties', (req, res) => {
-  var repo = repositories.repositoriesProperties(req.params.repo1, req.params.repo2, req.params.repo3, req.params.repo4, req.params.repo5, ACCESS_TOKEN);
+  var repo = repositories.repositoriesProperties(req.params , ACCESS_TOKEN);
   repo.then(val => res.json(val));
 })
 
