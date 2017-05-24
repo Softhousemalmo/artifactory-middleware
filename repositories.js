@@ -47,8 +47,6 @@ module.exports = {
                 method: 'GET',
             }
 
-            console.log('options : ' + options);
-            console.log("this is the url " + url);
 
             // Start the request
             request(options, function (error, response, data) {
@@ -115,27 +113,27 @@ module.exports = {
         })
     },
 
-    repositoriesProperties: function (repo, token) {
-        return new Promise((resolve, reject) => {
-            // Set the headers
-            const headers = {
-                'X-JFrog-Art-Api': token
-            }
+    // repositoriesProperties: function (repo, token) {
+    //     return new Promise((resolve, reject) => {
+    //         // Set the headers
+    //         const headers = {
+    //             'X-JFrog-Art-Api': token
+    //         }
 
-            // Configure the request
-            const options = {
-                url: apiUrl + 'storage/' + repo + '?properties',
-                method: 'GET',
-                headers: headers,
-            }
+    //         // Configure the request
+    //         const options = {
+    //             url: apiUrl + 'storage/' + repo + '?properties',
+    //             method: 'GET',
+    //             headers: headers,
+    //         }
 
-            console.log("option for properities:   ", options);
+    //         console.log("option for properities:   ", options);
 
-            // Start the request
-            request(options, function (error, response, data) {
-                var str = JSON.parse(data);
-                resolve(str);
-            })
-        })
-    }
+    //         // Start the request
+    //         request(options, function (error, response, data) {
+    //             var str = JSON.parse(data);
+    //             resolve(str);
+    //         })
+    //     })
+    // }
 }
