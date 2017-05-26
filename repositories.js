@@ -113,27 +113,4 @@ module.exports = {
         })
     },
 
-    // repositoriesProperties: function (repo, token) {
-    //     return new Promise((resolve, reject) => {
-    //         // Set the headers
-    //         const headers = {
-    //             'X-JFrog-Art-Api': token
-    //         }
-
-    //         // Configure the request
-    //         const options = {
-    //             url: apiUrl + 'storage/' + repo + '?properties',
-    //             method: 'GET',
-    //             headers: headers,
-    //         }
-
-    //         console.log("option for properities:   ", options);
-
-    //         // Start the request
-    //         request(options, function (error, response, data) {
-    //             var str = JSON.parse(data);
-    //             resolve(str);
-    //         })
-    //     })
-    // }
 }
