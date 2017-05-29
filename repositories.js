@@ -68,14 +68,11 @@ module.exports = {
                 'Content-Type': 'text/plain'
             }
 
-            const search = "items.find({'repo':{'$eq':'" + query + "'});";
-
             // Configure the request
             const options = {
                 headers: headers,
-                url: apiUrl + 'search/aql',
-                body: search,
-                method: 'POST',
+                url: apiUrl + 'search/artifact?name=' + query,
+                method: 'GET',
 
             }
 
